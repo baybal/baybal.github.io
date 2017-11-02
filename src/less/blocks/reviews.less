@@ -1,0 +1,96 @@
+.h-reviews {
+  margin: 4vw auto 3.55vw;
+  overflow: hidden;
+
+  &__list {
+    margin: 0 -3.3vw;
+    column-count: 2;
+  }
+
+  &__item {
+    font-size: 1.6vw;
+    padding: 0 3.9vw;
+    margin-bottom: 3.1vw;
+  }
+
+  &__text {
+    margin: 0;
+    line-height: 1.45;
+    letter-spacing: -0.3px;
+    margin-bottom: 1.3vw;
+  }
+
+  &__author {
+    font-family: 'Termina-Bold', sans-serif;
+    font-size: 1.31vw;
+  }
+
+  .h-devider {
+    font-size: 4vw;
+    margin: 1vw 0 2vw;
+  }
+
+  @media (max-width: 850px) {
+    &__list {
+      column-count: 1;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    margin: 44px auto 39px;
+
+    &__list {
+      margin: 0 -36px;
+    }
+
+    &__item {
+      font-size: 18px;
+      padding: 0 42px;
+      margin-bottom: 34px;
+    }
+
+    &__author {
+      font-size: 14px;
+    }
+
+    .h-devider {
+      font-size: 44px;
+      margin: 10px 0 20px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    margin-top: 22px;
+
+    &__item {
+      font-size: 20px;
+    }
+
+    &__author {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-width: 1500px) {
+    margin: 60px auto 53px;
+
+    &__list {
+      margin: 0 -50px;
+    }
+
+    &__item {
+      font-size: 24px;
+      padding: 0 58px;
+      margin-bottom: 46px;
+    }
+
+    &__author {
+      font-size: 20px;
+    }
+
+    .h-devider {
+      font-size: 60px;
+      margin: 15px 0 30px;
+    }
+  }
+}

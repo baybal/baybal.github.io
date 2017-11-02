@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "cross-env NODE_ENV=development webpack --hide-modules",
+    "watch": "cross-env NODE_ENV=development webpack --watch --hide-modules",
+    "prod": "cross-env NODE_ENV=production webpack --hide-modules",
+    "serve": "webpack-dev-server --open"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^5.0.0",
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "file-loader": "^1.1.5",
+    "font-awesome": "^4.7.0",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.3",
+    "lodash-es": "^4.17.4",
+    "normalize.css": "^7.0.0",
+    "spritz.js": "^2.2.1",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.5.4",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {}
+}

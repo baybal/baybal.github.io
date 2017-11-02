@@ -1,0 +1,80 @@
+.h-contacts {
+  margin: 3.3vw auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+
+  &__item {
+    margin: 0 2.3vw;
+    font-size: 1.5vw;
+    font-family: 'Termina-Bold', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.3;
+
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &--messenger .h-contacts__text {
+      padding-left: 2.5vw;
+      //background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 128 128' width='128' height='128' xmlns='http://www.w3.org/2000/svg'><path fill='#1110f8' fill-rule='evenodd' d='M 64 0 C 28.65 0 0 26.53 0 59.26 C 0 77.91 9.31 94.54 23.85 105.41 L 23.85 128 L 45.64 116 C 51.62 117.651 57.796 118.485 64 118.48 C 99.35 118.48 128 91.95 128 59.22 C 128 26.49 99.35 0 64 0 Z M 70.21 79.8 L 53.91 62.42 L 22.11 79.8 L 57.11 42.66 L 73.79 60 L 105.19 42.62 Z'/></svg>");
+
+      /* URL encode SVG for IE */
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%270%200%20128%20128%27%20width%3D%27128%27%20height%3D%27128%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cpath%20fill%3D%27%231110f8%27%20fill-rule%3D%27evenodd%27%20d%3D%27M%2064%200%20C%2028.65%200%200%2026.53%200%2059.26%20C%200%2077.91%209.31%2094.54%2023.85%20105.41%20L%2023.85%20128%20L%2045.64%20116%20C%2051.62%20117.651%2057.796%20118.485%2064%20118.48%20C%2099.35%20118.48%20128%2091.95%20128%2059.22%20C%20128%2026.49%2099.35%200%2064%200%20Z%20M%2070.21%2079.8%20L%2053.91%2062.42%20L%2022.11%2079.8%20L%2057.11%2042.66%20L%2073.79%2060%20L%20105.19%2042.62%20Z%27%2F%3E%3C%2Fsvg%3E");
+
+      background-size: 2vw 2vw;
+      background-position: 0 6px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__text {
+    display: inline-block;
+    padding: 5px 0;
+  }
+
+  @media (max-width: 850px) {
+    flex-flow: column nowrap;
+  }
+
+  @media (max-width: 1100px) {
+    margin: 36px auto;
+
+    &__item {
+      margin: 0 25px;
+      font-size: 16px;
+
+      &--messenger .h-contacts__text {
+        padding-left: 28px;
+        background-size: 22px 22px;
+        background-position: 0 4px;
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    margin: 15px auto;
+
+    &__item {
+      font-size: 14px;
+      margin: 0 0 5px;
+    }
+  }
+
+  @media (min-width: 1500px) {
+    margin: 3.3vw auto;
+
+    &__item {
+      margin: 0 35px;
+      font-size: 22px;
+
+      &--messenger .h-contacts__text {
+        padding-left: 38px;
+        background-size: 30px 30px;
+      }
+    }
+  }
+}

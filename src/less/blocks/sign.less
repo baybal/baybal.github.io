@@ -1,0 +1,26 @@
+.h-sign {
+  height: ~"calc(100% - (6vw * 1.5 * 1.32))";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  @media (max-width: 1100px) {
+    height: ~"calc(100% - (66px * 1.5 * 1.32))";
+  }
+
+  @media (max-width: 500px) {
+    height: ~"calc(100% - (38px * 1.5 * 1.32))";
+  }
+
+  @media (min-width: 1750px) {
+    height: ~"calc(100% - (105px * 1.5 * 1.32))";
+  }
+
+  &__logo {
+    width: 192px;
+    height: 45px;
+    margin-top: 80px;
+    display: inline-block;
+  }
+}
