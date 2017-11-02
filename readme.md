@@ -1,5 +1,5 @@
 # Hoodies Landing Page
-[https://hoodieshq.hithub.io](https://hoodieshq.hithub.io)
+[https://hoodieshq.github.io](https://hoodieshq.hithub.io)
 ### Build Process
 Once `npm install`, then
 
