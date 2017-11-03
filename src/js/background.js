@@ -61,16 +61,20 @@ let creatures = [
       { pos: [42, 21], color: '#d0cfcc' },
     ],
     colors: ['#d0cfcc', '#d0cfcc', '#d0cfcc', '#f83c10', '#ffbf27'],
-    speed: 1000
+    speed: 1500
   }),
   // new Creature({
   //   blocks: [
   //     { pos: [5, 5], color: 'blue' },
-  //     { pos: [5, 6], color: 'blue' },
-  //     { pos: [5, 7], color: 'blue' }
+  //     { pos: [6, 5], color: 'blue' },
+  //     { pos: [7, 5], color: 'blue' },
+  //     { pos: [6, 6], color: 'blue' },
+  //     { pos: [5, 7], color: 'blue' },
+  //     { pos: [6, 7], color: 'blue' },
+  //     { pos: [7, 7], color: 'blue' }
   //   ],
   //   colors: ['blue'],
-  //   speed: 500
+  //   //speed: 500
   // })
 ];
 
@@ -89,20 +93,11 @@ new Vue({
     extremes: function() {
       return !debug ? [] : this.creatures[0].extremes
         .map((c) => {
-          let size = window.innerWidth / 50,
-              points = [
-                { x: c.pos.x * size, y: c.pos.y * size },
-                { x: c.pos.x * size + size, y: c.pos.y * size },
-                { x: c.pos.x * size + size, y: c.pos.y * size + size },
-                { x: c.pos.x * size, y: c.pos.y * size + size }
-              ];
-
           return {
+            id: Date.now(),
             color: 'yellow',
             stroke: 'yellow',
-            points: points.map((point) => {
-              return point.x + ',' + point.y
-            }).join(' ')
+            points: c.points
           }
         })
     },
@@ -110,7 +105,7 @@ new Vue({
       let cells = this.creatures[0].possibleCells;
       return !debug ? [] : cells
         .map((c) => {
-          let size = window.innerWidth / 50,
+          let size = Math.ceil(window.innerWidth / 50),
               points = [
                 { x: c[0] * size, y: c[1] * size },
                 { x: c[0] * size + size, y: c[1] * size },
@@ -119,6 +114,7 @@ new Vue({
               ];
 
           return {
+            id: Date.now(),
             color: 'transparent',
             stroke: 'red',
             points: points.map((point) => {
@@ -145,7 +141,8 @@ new Vue({
                 points: b.points,
                 fill: b.color,
                 stroke: b.stroke
-              }
+              },
+              key: 'id'
             }
           )
         })

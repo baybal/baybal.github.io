@@ -10,8 +10,8 @@ export default class Creature {
     let defaults = {
       colors: ['lime'],
       blocks: [],
-      maxMass: 30,
-      maxPossibles: 15
+      maxMass: 60,
+      maxPossibles: 4
     }
 
     this.options =  extend(defaults, options)
@@ -46,15 +46,16 @@ export default class Creature {
   }
 
   loop () {
-    if (this.blocks.length > this.options.maxMass && this.extremeBlocks().length) {
-      this.removeBlock(this.extremeBlocks().shift())
-    }
-
-    this.generateBlock()
-
     setTimeout(() => {
       requestAnimationFrame(this.loop.bind(this))
     }, this.options.speed)
+
+    if (this.blocks.length > this.options.maxMass) {
+      this.removeBlock(this.extremeBlocks().shift())
+      return;
+    }
+
+    this.generateBlock()
   }
 
   createBlock(pos, color) {
@@ -120,8 +121,13 @@ export default class Creature {
   }
 
   extremeBlocks() {
+    function isAdjacent(cells) {
+      let [a, b, c] = cells;
+      return (Math.abs(a[0] - b[0]) < 2) && (Math.abs(a[0] - c[0]) < 2) && (Math.abs(b[0] - c[0]) < 2) && (Math.abs(a[1] - b[1]) < 2) && (Math.abs(a[1] - c[1]) < 2) && (Math.abs(b[1] - c[1]) < 2);
+    }
+
     return this.blocks.filter((block) => {
-      return block.neighbours.length == 1;
+      return block.neighbours.length == 1 || (block.circle.length == 3 && isAdjacent(block.circle));
     })
   }
 }
@@ -175,6 +181,7 @@ class Grid {
 
 class Block {
   constructor(creature, coords, color, size) {
+    this.id = Date.now()
     this.creature = creature
     this.color = this.ownColor = color
     this.stroke = color
@@ -201,6 +208,12 @@ class Block {
 
   get neighbours() {
     return this.getBorderingCells().filter((cell) => {
+      return this.creature.grid.getCell(cell) == 1;
+    })
+  }
+
+  get circle() {
+    return this.getBorderingCells(true).filter((cell) => {
       return this.creature.grid.getCell(cell) == 1;
     })
   }
