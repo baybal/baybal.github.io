@@ -61,7 +61,7 @@ let creatures = [
       { pos: [42, 21], color: '#d0cfcc' },
     ],
     colors: ['#d0cfcc', '#d0cfcc', '#d0cfcc', '#f83c10', '#ffbf27'],
-    //speed: 1500
+    speed: window.speed
   }),
   // new Creature({
   //   blocks: [
