@@ -60,24 +60,24 @@
 /******/ 	__webpack_require__.p = "/dist/build/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 21:
+/***/ 24:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(22);
+module.exports = __webpack_require__(25);
 
 
 /***/ }),
 
-/***/ 22:
+/***/ 25:
 /***/ (function(module, __webpack_exports__) {
 
 "use strict";
-throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'c:\\dev\\hoodieshq.github.io\\src\\js\\creatures.js'\n    at Error (native)");
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'c:\\dev\\hoodieshq.github.io\\src\\js\\test.js'\n    at Error (native)");
 
 /***/ })
 

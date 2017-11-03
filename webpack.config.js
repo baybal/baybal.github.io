@@ -9,8 +9,8 @@ module.exports = {
       './src/js/hoodies.js',
       './src/less/hoodies.less'
     ],
-    creatures: [
-      './src/js/creatures.js'
+    background: [
+      './src/js/background.js'
     ]
   },
 
@@ -22,7 +22,8 @@ module.exports = {
 
   resolve: {
     alias: {
-      'modules': path.resolve(__dirname, './src/js/modules/')
+      'modules': path.resolve(__dirname, './src/js/modules/'),
+      'vue$': 'vue/dist/vue.runtime.esm.js'
     }
   },
 
