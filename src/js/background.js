@@ -60,15 +60,17 @@ let creatures = [
       { pos: [42, 20], color: '#d0cfcc' },
       { pos: [42, 21], color: '#d0cfcc' },
     ],
-    colors: ['#d0cfcc'],
-    //speed: 1000
+    colors: ['#d0cfcc', '#d0cfcc', '#d0cfcc', '#f83c10', '#ffbf27'],
+    speed: 1000
   }),
   // new Creature({
   //   blocks: [
-  //     { pos: [45, 0], color: 'lime' },
-  //     { pos: [44, 0], color: 'lime' }
+  //     { pos: [5, 5], color: 'blue' },
+  //     { pos: [5, 6], color: 'blue' },
+  //     { pos: [5, 7], color: 'blue' }
   //   ],
-  //   colors: ['lime']
+  //   colors: ['blue'],
+  //   speed: 500
   // })
 ];
 
@@ -96,7 +98,7 @@ new Vue({
               ];
 
           return {
-            color: 'transparent',
+            color: 'yellow',
             stroke: 'yellow',
             points: points.map((point) => {
               return point.x + ',' + point.y

@@ -10,8 +10,8 @@ export default class Creature {
     let defaults = {
       colors: ['lime'],
       blocks: [],
-      maxMass: 5,
-      maxPossibles: 3
+      maxMass: 30,
+      maxPossibles: 15
     }
 
     this.options =  extend(defaults, options)
@@ -41,45 +41,31 @@ export default class Creature {
           );
       }()
 
-      setTimeout(() => { requestAnimationFrame(this.loop.bind(this)) }, 2000)
+      requestAnimationFrame(this.loop.bind(this))
     }
-
-    // this.blocks.map((block) => {
-    //   console.log(block, block.getBorderingCells().map((c) => {
-    //     return {
-    //       pos: c,
-    //       value: this.grid.getCell(c)
-    //     }
-    //   }))
-    // })
   }
 
   loop () {
-    if (this.blocks.length > 2 && this.extremeBlocks().length) {
+    if (this.blocks.length > this.options.maxMass && this.extremeBlocks().length) {
       this.removeBlock(this.extremeBlocks().shift())
     }
 
     this.generateBlock()
-    //console.log(this.extremeBlocks())
+
     setTimeout(() => {
       requestAnimationFrame(this.loop.bind(this))
     }, this.options.speed)
   }
 
   createBlock(pos, color) {
+    this.removePossibleCell(pos)
     let block = new Block(this, pos, color, this.cell);
-    console.log('create block', pos)
+
     this.blocks.push(block)
     this.grid.setCell(pos, 1)
-    this.removePossibleCell(pos)
     this.addPossibleCells(block)
 
-    this.extremes = this.blocks.filter((b) => {
-      let bordering = b.getBorderingCells();
-      return bordering.filter((a) => {
-        return this.grid.getCell(a) === 1
-      }).length
-    })
+    this.extremes = this.extremeBlocks()
 
     return block;
   }
@@ -92,7 +78,6 @@ export default class Creature {
 
       if (cell[0] >= 0 && cell[0] < this.grid.width && cell[1] >= 0 && cell[1] < this.grid.height && this.grid.isEmptyCell(cell)) {
         this.possibleCells.push(cell)
-        console.log('add possible', cell)
         this.grid.setCell(cell, -1)
       }
     }
@@ -105,7 +90,7 @@ export default class Creature {
 
       this.createBlock(pos, this.options.colors[getRandomArrayIndex(this.options.colors)], this.cell);
     } else {
-      //this.addPossibleCells(this.blocks[0])
+      this.addPossibleCells(this.blocks[getRandomArrayIndex(this.blocks)])
     }
   }
 
@@ -130,7 +115,6 @@ export default class Creature {
 
     if (index >= 0) {
       this.possibleCells.splice( index, 1 )
-      console.log('remove possible', cell)
       this.grid.setCell(cell, undefined);
     }
   }
@@ -165,13 +149,11 @@ class Grid {
 
   setCell(cell, value) {
     if (!this.isValidCell(cell)) {
-      console.log('invalid cell', cell)
       return;
     }
 
     let [x, y] = cell;
     this.matrix[x][y] = value;
-    console.log('set grid', cell, value, this.matrix[x][y])
   }
 
   createMatrix(width, height) {
