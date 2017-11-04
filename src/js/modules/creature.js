@@ -8,10 +8,10 @@ import {
 export default class Creature {
   constructor(options = {}) {
     let defaults = {
-      colors: ['lime'],
+      colors: ['blue'],
       blocks: [],
-      maxMass: 60,
-      maxPossibles: 4
+      maxBlocks: 60,
+      maxNextSteps: 20
     }
 
     this.options =  extend(defaults, options)
@@ -20,8 +20,7 @@ export default class Creature {
 
     this.grid = new Grid(50, Math.ceil(window.innerHeight / this.cell))
 
-    this.extremes = []
-    this.possibleCells = []
+    this.nextSteps = []
     this.blocks = []
 
     options.blocks.map((b) => this.createBlock(b.pos, b.color))
@@ -50,8 +49,8 @@ export default class Creature {
       requestAnimationFrame(this.loop.bind(this))
     }, this.options.speed)
 
-    if (this.blocks.length > this.options.maxMass) {
-      this.removeBlock(this.extremeBlocks().shift())
+    if (this.blocks.length > this.options.maxBlocks) {
+      this.removeBlock(this.edgeBlocks.shift())
       return;
     }
 
@@ -59,39 +58,37 @@ export default class Creature {
   }
 
   createBlock(pos, color) {
-    this.removePossibleCell(pos)
+    this.removeNextStep(pos)
     let block = new Block(this, pos, color, this.cell);
 
     this.blocks.push(block)
     this.grid.setCell(pos, 1)
-    this.addPossibleCells(block)
-
-    this.extremes = this.extremeBlocks()
+    this.generateNextSteps(block)
 
     return block;
   }
 
-  addPossibleCells(block) {
+  generateNextSteps(block) {
     let borderingCells = block.getBorderingCells();
 
-    while(this.possibleCells.length < this.options.maxPossibles && borderingCells.length > 0) {
+    while(this.nextSteps.length < this.options.maxNextSteps && borderingCells.length > 0) {
       let [cell] = borderingCells.splice( getRandomArrayIndex(borderingCells), 1);
 
       if (cell[0] >= 0 && cell[0] < this.grid.width && cell[1] >= 0 && cell[1] < this.grid.height && this.grid.isEmptyCell(cell)) {
-        this.possibleCells.push(cell)
+        this.nextSteps.push(cell)
         this.grid.setCell(cell, -1)
       }
     }
   }
 
   generateBlock() {
-    if (this.possibleCells.length) {
-      let i = getRandomArrayIndex(this.possibleCells),
-          [ pos ] = this.possibleCells.splice(i, 1);
+    if (this.nextSteps.length) {
+      let i = getRandomArrayIndex(this.nextSteps),
+          [ pos ] = this.nextSteps.splice(i, 1);
 
       this.createBlock(pos, this.options.colors[getRandomArrayIndex(this.options.colors)], this.cell);
     } else {
-      this.addPossibleCells(this.blocks[getRandomArrayIndex(this.blocks)])
+      this.generateNextSteps(this.blocks[getRandomArrayIndex(this.blocks)])
     }
   }
 
@@ -102,7 +99,7 @@ export default class Creature {
       let bordering = block.getBorderingCells(true);
 
       bordering.map((b) => {
-        this.removePossibleCell(b)
+        this.removeNextStep(b)
       })
 
       this.blocks.splice( index, 1 )
@@ -110,17 +107,17 @@ export default class Creature {
     }
   }
 
-  removePossibleCell(cell) {
-    let item = this.possibleCells.find((i) => i[0] == cell[0] && i[1] == cell[1]),
-        index = this.possibleCells.indexOf(item);
+  removeNextStep(cell) {
+    let item = this.nextSteps.find((i) => i[0] == cell[0] && i[1] == cell[1]),
+        index = this.nextSteps.indexOf(item);
 
     if (index >= 0) {
-      this.possibleCells.splice( index, 1 )
+      this.nextSteps.splice( index, 1 )
       this.grid.setCell(cell, undefined);
     }
   }
 
-  extremeBlocks() {
+  get edgeBlocks() {
     function isAdjacent(cells) {
       let [a, b, c] = cells;
       return (Math.abs(a[0] - b[0]) < 2) && (Math.abs(a[0] - c[0]) < 2) && (Math.abs(b[0] - c[0]) < 2) && (Math.abs(a[1] - b[1]) < 2) && (Math.abs(a[1] - c[1]) < 2) && (Math.abs(b[1] - c[1]) < 2);

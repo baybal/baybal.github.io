@@ -74,7 +74,7 @@ let creatures = [
   //     { pos: [7, 7], color: 'blue' }
   //   ],
   //   colors: ['blue'],
-  //   //speed: 500
+  //   speed: 500
   // })
 ];
 
@@ -90,8 +90,8 @@ new Vue({
     blocks: function() {
       return Array.prototype.concat.apply([], this.creatures.map((c) => c.blocks))
     },
-    extremes: function() {
-      return !debug ? [] : this.creatures[0].extremes
+    edgeBlocks: function() {
+      return !debug ? [] : this.creatures[0].edgeBlocks
         .map((c) => {
           return {
             id: Date.now(),
@@ -101,8 +101,8 @@ new Vue({
           }
         })
     },
-    possibles: function() {
-      let cells = this.creatures[0].possibleCells;
+    nextSteps: function() {
+      let cells = this.creatures[0].nextSteps;
       return !debug ? [] : cells
         .map((c) => {
           let size = Math.ceil(window.innerWidth / 50),
@@ -122,6 +122,26 @@ new Vue({
             }).join(' ')
           }
         })
+    },
+    grid: function() {
+      let blocks = this.creatures[0].blocks,
+          grid = this.creatures[0].grid,
+          cells = [],
+          size = Math.ceil(window.innerWidth / 50);
+      if (debug && false) {
+        for (var i = 0; i < grid.width; i++) {
+          for (var j = 0; j < grid.height; j++) {
+            cells.push({
+              x: (i * size) + ((size - 8) / 2),
+              y: (j * size) + ((size - 14)),
+              value: Number(grid.matrix[i][j]) || 0,
+              id: Date.now()
+            })
+          }
+        }
+      }
+
+      return cells;
     }
   },
   render: function(h) {
@@ -133,7 +153,7 @@ new Vue({
           //viewBox: `0 0 ${this.viewport.width} ${this.viewport.height}`
         }
       }, [
-        ...[].concat(this.blocks, this.possibles, this.extremes).map((b) => {
+        ...[].concat(this.blocks, this.nextSteps, this.edgeBlocks).map((b) => {
           return h(
             'polygon', {
               attrs: {
@@ -143,6 +163,17 @@ new Vue({
               },
               key: 'id'
             }
+          )
+        }),
+        ...this.grid.map((g) => {
+          return h(
+            'text', {
+              attrs: {
+                x: g.x,
+                y: g.y
+              },
+              key: 'id'
+            }, [ g.value ]
           )
         })
     ])
