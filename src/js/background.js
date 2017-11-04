@@ -148,9 +148,9 @@ new Vue({
     return h(
       'svg', {
         attrs: {
-          width: '100%',
-          height: '100%',
-          //viewBox: `0 0 ${this.viewport.width} ${this.viewport.height}`
+          // width: '100%',
+          // height: '100%',
+          viewBox: `0 0 ${window.innerWidth} ${window.innerHeight}`
         }
       }, [
         ...[].concat(this.blocks, this.nextSteps, this.edgeBlocks).map((b) => {
