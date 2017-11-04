@@ -61,7 +61,7 @@ let creatures = [
       { pos: [42, 21], color: '#d0cfcc' },
     ],
     colors: ['#d0cfcc', '#d0cfcc', '#d0cfcc', '#f83c10', '#ffbf27'],
-    //speed: window.speed
+    speed: window.speed
   }),
   // new Creature({
   //   blocks: [
@@ -78,7 +78,7 @@ let creatures = [
   // })
 ];
 
-let debug = true;
+let debug = false;
 
 new Vue({
   el: '#play-ground',
