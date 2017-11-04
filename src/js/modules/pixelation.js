@@ -32,7 +32,7 @@ export default class Pixelation {
           scrolled = maxElPos - curElPos,
           frames = this.sprite.options.steps,
           p = scrolled / maxElPos,
-          nextFrame = Math.ceil(frames * p) || 1;
+          nextFrame = Math.ceil(frames * p) > 0 ? Math.ceil(frames * p) : 1;
 
       if (nextFrame < frames) {
         this.sprite.step(nextFrame);
