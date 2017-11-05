@@ -1,3 +1,60 @@
+// .h-content {
+//   text-align: center;
+//   color: #1110f8;
+//
+//   font-family: 'LeituraNews-Roman1', serif;
+//   font-weight: normal;
+//   line-height: 1.2;
+//
+//   & > p {
+//     font-size: 6vw;
+//     margin: 0 auto;
+//     max-width: 80vw;
+//     letter-spacing: -0.4px;
+//
+//     &.bold {
+//       line-height: 1.17;
+//       font-weight: bold;
+//     }
+//
+//     b {
+//       font-size: 5vw;
+//     }
+//
+//     @media (max-width: 1100px) {
+//       max-width: 880px;
+//       font-size: 66px;
+//
+//       b {
+//         font-size: 55px;
+//       }
+//     }
+//
+//     @media (max-width: 500px) {
+//       font-size: 38px;
+//
+//       b {
+//         font-size: 36px;
+//       }
+//     }
+//
+//     @media (min-width: 1750px) {
+//       max-width: 1400px;
+//       font-size: 105px;
+//
+//       b {
+//         font-size: 87px;
+//       }
+//     }
+//   }
+//
+//   b {
+//     font-family: 'Termina-Bold', sans-serif;
+//     font-weight: bold;
+//   }
+// }
+
+
 .h-content {
   text-align: center;
   color: #1110f8;
@@ -6,10 +63,15 @@
   font-weight: normal;
   line-height: 1.2;
 
+  b {
+    font-family: 'Termina-Bold', sans-serif;
+    font-weight: bold;
+  }
+
   & > p {
-    font-size: 6vw;
+    font-size: 38px;
     margin: 0 auto;
-    max-width: 80vw;
+    max-width: 880px;
     letter-spacing: -0.4px;
 
     &.bold {
@@ -18,11 +80,10 @@
     }
 
     b {
-      font-size: 5vw;
+      font-size: 36px;
     }
 
-    @media (max-width: 1100px) {
-      max-width: 880px;
+    @media (min-width: 500px) {
       font-size: 66px;
 
       b {
@@ -30,11 +91,12 @@
       }
     }
 
-    @media (max-width: 500px) {
-      font-size: 38px;
+    @media (min-width: 1100px) {
+      font-size: 6vw;
+      max-width: 80vw;
 
       b {
-        font-size: 36px;
+        font-size: 5vw;
       }
     }
 
@@ -46,10 +108,5 @@
         font-size: 87px;
       }
     }
-  }
-
-  b {
-    font-family: 'Termina-Bold', sans-serif;
-    font-weight: bold;
   }
 }

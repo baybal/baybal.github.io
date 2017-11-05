@@ -1,4 +1,4 @@
-//require('viewport-units-buggyfill').init()
+require('viewport-units-buggyfill').init()
 import Pixelation from 'modules/pixelation.js'
 
 let logoPixelation = new Pixelation({
