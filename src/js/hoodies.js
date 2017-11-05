@@ -22,14 +22,14 @@ class App {
   }
 
   init() {
-    if (this.isMobileSafari()) {
+    if (this.is_iOS()) {
       this.updateSignStyle()
     }
     this.initPixels()
   }
 
   /**
-   * Fixing mobile Safari content shaking during scroll
+   * Fixing content shaking on iOS during scroll
    * It's caused by '100% height' of the signElement
    */
   updateSignStyle() {
@@ -48,8 +48,8 @@ class App {
     })
   }
 
-  isMobileSafari() {
-    return /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent);
+  is_iOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   }
 }
 
