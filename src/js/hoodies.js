@@ -1,17 +1,56 @@
-//require('viewport-units-buggyfill').init()
 import Pixelation from 'modules/pixelation.js'
+import throttle from 'lodash/throttle.js'
 
-let h = window.getComputedStyle(document.querySelector('.h-sign')).getPropertyValue('height')
+class App {
 
-document.querySelector('.h-sign').style.height = h
-
-let logoPixelation = new Pixelation({
-  el: '#hoodies-pixels',
-  config: {
-    picture: {
-      srcset: 'dist/media/pixels.png'
-    },
-    steps: 11,
-    rows: 11
+  constructor() {
+    this.options = {
+      SIGN: {
+        el: '.h-sign',
+        throttle: 100
+      },
+      PIXELS: {
+        el: '#hoodies-pixels',
+        config: {
+          picture: {
+            srcset: 'dist/media/pixels.png'
+          },
+          steps: 11,
+          rows: 11
+        }
+      }
+    }
   }
-})
+
+  init() {
+    this.bindUIActions()
+    this.updateSignStyle()
+    this.initPixels()
+  }
+
+  bindUIActions() {
+    window.addEventListener('resize', throttle(this.updateSignStyle.bind(this), this.options.SIGN.throttle))
+  }
+
+  /**
+   * Fixing mobile Safari content shaking during scroll
+   * It's caused by '100% height' of the signElement
+   */
+  updateSignStyle() {
+    let signElement = document.querySelector(this.options.SIGN.el);
+
+    if (signElement) {
+      signElement.setAttribute('style', '')
+      signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height');
+    }
+  }
+
+  initPixels() {
+    new Pixelation({
+      el: this.options.PIXELS.el,
+      config: this.options.PIXELS.config
+    })
+  }
+}
+
+new App().init()
