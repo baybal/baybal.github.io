@@ -1,5 +1,9 @@
-require('viewport-units-buggyfill').init()
+//require('viewport-units-buggyfill').init()
 import Pixelation from 'modules/pixelation.js'
+
+let h = window.getComputedStyle(document.querySelector('.h-sign')).getPropertyValue('height')
+
+document.querySelector('.h-sign').style.height = h
 
 let logoPixelation = new Pixelation({
   el: '#hoodies-pixels',
