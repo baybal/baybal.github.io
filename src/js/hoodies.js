@@ -29,7 +29,7 @@ class App {
   }
 
   bindUIActions() {
-    window.addEventListener('resize', throttle(this.updateSignStyle.bind(this), this.options.SIGN.throttle))
+    //window.addEventListener('resize', throttle(this.updateSignStyle.bind(this), this.options.SIGN.throttle))
   }
 
   /**
