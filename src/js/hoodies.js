@@ -22,13 +22,10 @@ class App {
   }
 
   init() {
-    this.bindUIActions()
-    this.updateSignStyle()
+    if (this.isMobileSafari()) {
+      this.updateSignStyle()
+    }
     this.initPixels()
-  }
-
-  bindUIActions() {
-
   }
 
   /**
@@ -49,6 +46,10 @@ class App {
       el: this.options.PIXELS.el,
       config: this.options.PIXELS.config
     })
+  }
+
+  isMobileSafari() {
+    return /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent);
   }
 }
 
