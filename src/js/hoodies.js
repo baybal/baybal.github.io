@@ -22,15 +22,15 @@ class App {
   }
 
   init() {
-    if (this.is_iOS()) {
+    if (this.isMobile()) {
       this.updateSignStyle()
     }
     this.initPixels()
   }
 
   /**
-   * Fixing content shaking on iOS during scroll
-   * It's caused by '100% height' of the signElement
+   * Fixing content shaking on mobile devices caused by
+   * scroll changing viewport height (browsers toolbars sliding)
    */
   updateSignStyle() {
     let signElement = document.querySelector(this.options.SIGN.el);
@@ -48,8 +48,8 @@ class App {
     })
   }
 
-  is_iOS() {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent) && !window.MSStream;
   }
 }
 
