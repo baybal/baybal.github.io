@@ -31,7 +31,10 @@ class App {
   }
 
   bindUIActions() {
-    window.addEventListener("orientationchange", this.updateSignStyle.bind(this), false);
+    window.addEventListener("orientationchange", () => {
+      alert(window.getComputedStyle(signElement).getPropertyValue('height'))
+      this.updateSignStyle.bind(this)
+    }, false);
   }
 
   /**
