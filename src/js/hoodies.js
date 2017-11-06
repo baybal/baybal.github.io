@@ -43,7 +43,10 @@ class App {
 
     if (signElement) {
       signElement.setAttribute('style', '')
-      signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height');
+      // making sure that previous value has been removed and then setting the new one 
+      setTimeout(() => {
+        signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
+      }, 0)
     }
   }
 
