@@ -39,22 +39,15 @@ class App {
    * scroll changing viewport height (browsers toolbars sliding)
    */
   updateSignStyle() {
-    console.log('orientation: '+ (window.orientation || false))
     let signElement = document.querySelector(this.options.SIGN.el);
 
     if (signElement) {
       signElement.setAttribute('style', '')
       // making sure that previous value has been removed and then setting the new one
-
-      requestAnimationFrame(() => {
-        alert('r: ' + window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height'))
+      setTimeout(() => {
+        //alert('r: ' + window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height'))
         signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
-      })
-
-
-      // setTimeout(() => {
-      //   signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
-      // }, 300)
+      }, 200)
     }
   }
 
