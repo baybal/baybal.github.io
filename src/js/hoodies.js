@@ -39,7 +39,7 @@ class App {
    * scroll changing viewport height (browsers toolbars sliding)
    */
   updateSignStyle() {
-    console.log('orientation: '+ (orientation || false))
+    console.log('orientation: '+ (window.orientation || false))
     let signElement = document.querySelector(this.options.SIGN.el);
 
     if (signElement) {
