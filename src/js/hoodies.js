@@ -1,7 +1,6 @@
 import Pixelation from 'modules/pixelation.js'
 
 class App {
-
   constructor() {
     this.options = {
       SIGN: {
@@ -19,6 +18,8 @@ class App {
         }
       }
     }
+
+    this.init()
   }
 
   init() {
@@ -26,6 +27,11 @@ class App {
       this.updateSignStyle()
     }
     this.initPixels()
+    this.bindUIActions()
+  }
+
+  bindUIActions() {
+    window.addEventListener("orientationchange", this.updateSignStyle.bind(this), false);
   }
 
   /**
@@ -53,4 +59,4 @@ class App {
   }
 }
 
-new App().init()
+new App()
