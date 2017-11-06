@@ -31,10 +31,7 @@ class App {
   }
 
   bindUIActions() {
-    window.addEventListener("orientationchange", () => {
-
-      this.updateSignStyle.bind(this)
-    }, false);
+    window.addEventListener("orientationchange", this.updateSignStyle.bind(this), false)
   }
 
   /**
@@ -42,6 +39,7 @@ class App {
    * scroll changing viewport height (browsers toolbars sliding)
    */
   updateSignStyle() {
+    console.log('orientation: '+ orientation)
     let signElement = document.querySelector(this.options.SIGN.el);
 
     if (signElement) {
@@ -50,7 +48,7 @@ class App {
       setTimeout(() => {
         alert(window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height'))
         signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
-      }, 300)
+      }, 0)
     }
   }
 
