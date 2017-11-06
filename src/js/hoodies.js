@@ -32,7 +32,7 @@ class App {
 
   bindUIActions() {
     window.addEventListener("orientationchange", () => {
-      alert(window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height'))
+
       this.updateSignStyle.bind(this)
     }, false);
   }
@@ -48,8 +48,9 @@ class App {
       signElement.setAttribute('style', '')
       // making sure that previous value has been removed and then setting the new one
       setTimeout(() => {
+        alert(window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height'))
         signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
-      }, 100)
+      }, 300)
     }
   }
 

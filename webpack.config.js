@@ -101,6 +101,9 @@ if (isProduction) {
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
+      output: {
+        comments: false
+      },
       compress: {
         warnings: false
       }
