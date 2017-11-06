@@ -45,10 +45,16 @@ class App {
     if (signElement) {
       signElement.setAttribute('style', '')
       // making sure that previous value has been removed and then setting the new one
-      setTimeout(() => {
-        alert(window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height') + signElement.style.height)
+
+      requestAnimationFrame(() => {
+        alert('r: ' + window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height'))
         signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
-      }, 300)
+      })
+
+
+      // setTimeout(() => {
+      //   signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
+      // }, 300)
     }
   }
 
