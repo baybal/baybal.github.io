@@ -5,7 +5,7 @@ class App {
     this.options = {
       SIGN: {
         el: '.h-sign',
-        throttle: 100
+        update_timeout: 200
       },
       PIXELS: {
         el: '#hoodies-pixels',
@@ -45,9 +45,8 @@ class App {
       signElement.setAttribute('style', '')
       // making sure that previous value has been removed and then setting the new one
       setTimeout(() => {
-        //alert('r: ' + window.getComputedStyle(document.querySelector(this.options.SIGN.el)).getPropertyValue('height'))
         signElement.style.height = window.getComputedStyle(signElement).getPropertyValue('height')
-      }, 200)
+      }, this.options.SIGN.update_timeout)
     }
   }
 
