@@ -30,15 +30,18 @@ export default class Pixelation {
           curElPos = getElementPosition(this.el),
           maxElPos = curElPos + scrollPos,
           scrolled = maxElPos - curElPos,
-          frames = this.sprite.options.steps,
-          p = scrolled / maxElPos,
-          nextFrame = Math.ceil(frames * p) > 0 ? Math.ceil(frames * p) : 1;
+          frames_count = this.sprite.options.steps,
+          acceleration = 1.5,
+          p = scrolled / maxElPos * acceleration,
+          nextFrame = Math.ceil(frames_count * p);
 
-      if (nextFrame < frames) {
-        this.sprite.step(nextFrame);
-      } else {
-        this.sprite.step(frames);
+      if (nextFrame <= 0) {
+        nextFrame = 1
+      } else if (nextFrame > frames_count) {
+        nextFrame = frames_count
       }
+
+      this.sprite.step(nextFrame)
 
     }, this.options.throttle)
 
